@@ -35,7 +35,7 @@ git clone https://github.com/dnitra/phonebook.git
 cd phonebook
 ```
 
-### 2. Boot up the Docker containers with Sail helper tool
+### 2. Install dependencies and run the app
 
 ```bash
 docker run --rm \
@@ -49,6 +49,7 @@ alias sail='bash vendor/bin/sail'
 sail up -d
 sail artisan key:generate
 sail artisan migrate --seed
+open http://localhost
 ```
 
 ### 3. Run tests

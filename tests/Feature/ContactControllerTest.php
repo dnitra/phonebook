@@ -221,7 +221,6 @@ class ContactControllerTest extends TestCase
     {
         $contact = Contact::factory()->create();
         $response = $this->deleteJson('/api/v1/contacts/testError');
-        print_r($response->getContent());
         $response->assertStatus(500);
         $response->assertJsonStructure([
             'message',
