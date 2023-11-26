@@ -13,7 +13,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         $contacts = Contact::with(['phoneNumbers:id,phone_number,contact_id'])
             ->get();
@@ -23,7 +23,7 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : JsonResponse
+    public function store(Request $request): JsonResponse
     {
         try {
             $this->validateContact($request);
@@ -32,7 +32,9 @@ class ContactController extends Controller
                 'last_name' => $request->last_name
             ]);
 
-            if (!$contact) throw new \Exception('Unable to save contact');
+            if (!$contact) {
+                throw new \Exception('Unable to save contact');
+            }
 
             $phoneNumbers = $request->phone_numbers;
             foreach ($phoneNumbers as $phoneNumber) {
@@ -57,7 +59,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) : JsonResponse
+    public function show(string $id): JsonResponse
     {
         try {
             $contact = Contact::with('phoneNumbers')->findOrFail($id);
@@ -74,7 +76,7 @@ class ContactController extends Controller
      * Search for a contact by phone number.
      * TODO: should return contact with all phone numbers?
      */
-    public function findByPhoneNumber(string $phoneNumber) : JsonResponse
+    public function findByPhoneNumber(string $phoneNumber): JsonResponse
     {
         try {
             $phoneNumber = $this->getPhoneNumberDigits($phoneNumber);
@@ -103,7 +105,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) :JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
 
         try {
@@ -136,7 +138,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         try {
             $contact = Contact::find($id);
@@ -159,7 +161,7 @@ class ContactController extends Controller
     /**
      * Get the digits from a phone number.
      */
-    protected function getPhoneNumberDigits(string $phoneNumber) : string
+    protected function getPhoneNumberDigits(string $phoneNumber): string
     {
         return preg_replace('/[^0-9]/', '', $phoneNumber);
     }
@@ -168,7 +170,7 @@ class ContactController extends Controller
     /**
      * Validate the contact and phone numbers request.
      */
-    protected function validateContact(Request $request) : void
+    protected function validateContact(Request $request): void
     {
         $phoneNumbers = $request->phone_numbers;
         foreach ($phoneNumbers as $phoneNumber) {
