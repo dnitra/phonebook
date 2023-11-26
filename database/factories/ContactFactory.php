@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Contact;
-use App\Models\Phone;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory

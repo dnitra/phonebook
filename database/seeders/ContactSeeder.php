@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Contact;
-use App\Models\Phone;
 
 use App\Models\PhoneNumber;
 use Illuminate\Database\Seeder;
