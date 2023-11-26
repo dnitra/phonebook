@@ -49,8 +49,6 @@ alias sail='bash vendor/bin/sail'
 sail up -d
 sail artisan key:generate
 sail artisan migrate --seed
-sail npm install
-sail npm run dev
 ```
 
 ### 3. Run tests
