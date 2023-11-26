@@ -31,41 +31,29 @@
 ### 1. Clone the repository
 
 ```bash
-git clone github.com/dnitra/phonebook
+git clone https://github.com/dnitra/phonebook.git
+cd phonebook
 ```
 
 ### 2. Boot up the Docker containers with Sail helper tool
 
 ```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+cp .env.example .env
 alias sail='bash vendor/bin/sail'
 sail up -d
-```
-### 3. Install dependencies
-
-```bash
-sail composer install
-sail npm install
-```
-
-### 4. Generate application key
-
-```bash
 sail artisan key:generate
-```
-
-### 5. Create `.env` file
-
-```bash
-cp .env.example .env
-```
-
-### 6. Run database migrations and seeders
-
-```bash
 sail artisan migrate --seed
+sail npm install
+sail npm run dev
 ```
 
-### 7. Run tests
+### 3. Run tests
 
 ```bash
 sail artisan test
