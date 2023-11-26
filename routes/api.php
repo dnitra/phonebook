@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1'], function () {
-    Route::apiResource('contacts', 'App\Http\Controllers\ContactController');
+    Route::apiResource('contacts', ContactController::class);
+    Route::get('contacts/phone/{phone_number}', [ContactController::class, 'findByPhoneNumber']);
 });
-// generate the api resource controller
-php artisan make:controller ContactController --api
