@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Feature;
 
 use App\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
